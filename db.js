@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+require('dotenv').config()
 
-const url = 'mongodb+srv://vikthor182:JenVicSolMani49@cluster0.8ckqtbw.mongodb.net/tasks?retryWrites=true&w=majority&appName=Cluster0';
+const url = process.env.db_uri;
 
 mongoose.connect(url)
     .then( () => {
@@ -9,4 +10,3 @@ mongoose.connect(url)
     .catch( (err) => {
         console.error(`Error connecting to the database. ${err}`);
     })
-

@@ -11,14 +11,18 @@ tasks.route('/')
     .post(async (req, res) => {
         const task = new Task({
             fields : {
-              title: req.query.title,
-              status: req.query.status,
-              description: req.query.description
+              title: req.body.title,
+              status: req.body.status,
+              description: req.body.description
             },
-            id: req.query.id
+            id: req.body.id
         });
-        if (task) await task.save(task)
-        else return res.status((500))
+        if (task) {
+          await task.save(task) 
+          return res.status(200).json({ message :'task added'} )
+        } else {
+          return res.status(500)
+        }
     })
 
     tasks.route('/:id')
